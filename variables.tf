@@ -19,6 +19,21 @@ variable "unique_identifier" {
   }
 }
 
+variable "timezone" {
+  description = "Timezone in Region/City format"
+  default     = "America/New_York"
+}
+
+variable "weekly_schedule_hour" {
+  description = "Hour of the day to run the task"
+  default     = 10
+}
+
+variable "weekly_schedule_dayofweek" {
+  description = "Day of the week to run the task"
+  default     = "MON"
+}
+
 variable "owner" {
   description = "Your email address"
 }

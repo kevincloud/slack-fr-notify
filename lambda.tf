@@ -44,7 +44,7 @@ resource "aws_cloudwatch_log_stream" "lambda_logstream_notifyapp" {
 }
 
 resource "aws_iam_role" "lambda_iam_role" {
-  name = "${var.unique_identifier}_iam_for_lambda"
+  name = "${var.unique_identifier}-iam-for-lambda"
 
   assume_role_policy = jsonencode({
     "Version" : "2012-10-17",

@@ -1,5 +1,8 @@
-aws_region        = "us-east-2"
-pendo_api_key     = "YOUR_PENDO_FEEDBACK_API_KEY"
-slack_webhook     = "YOUR_SLACK_WEBHOOK_URL"
-unique_identifier = "some-unique-prefix"
-owner             = "your.email@example.com"
+aws_region                = "us-east-2"
+pendo_api_key             = "YOUR_PENDO_FEEDBACK_API_KEY"
+slack_webhook             = "YOUR_SLACK_WEBHOOK_URL"
+unique_identifier         = "some-unique-prefix"
+timezone                  = "America/New_York"
+weekly_schedule_hour      = 10
+weekly_schedule_dayofweek = "MON"
+owner                     = "your.email@example.com"
