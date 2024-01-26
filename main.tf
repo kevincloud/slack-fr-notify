@@ -8,7 +8,3 @@ provider "aws" {
 }
 
 provider "archive" {}
-
-provider "launchdarkly" {
-  access_token = var.ld_access_token
-}
