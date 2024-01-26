@@ -7,7 +7,7 @@ resource "aws_scheduler_schedule" "fr_schedule" {
     maximum_window_in_minutes = 15
   }
 
-  schedule_expression          = "cron(0 ${var.weekly_schedule_hour} ? * ${var.weekly_schedule_dayofweek} *)"
+  schedule_expression          = "cron(${var.weekly_schedule_mins} ${var.weekly_schedule_hour} ? * ${var.weekly_schedule_dayofweek} *)"
   schedule_expression_timezone = var.timezone
 
   target {
@@ -48,8 +48,8 @@ resource "aws_iam_policy" "schedule_policy" {
           "lambda:InvokeFunction"
         ],
         "Resource" : [
-          "${aws_lambda_function.lambda_notifyapp.invoke_arn}:*",
-          aws_lambda_function.lambda_notifyapp.invoke_arn
+          "${aws_lambda_function.lambda_notifyapp.arn}:*",
+          aws_lambda_function.lambda_notifyapp.arn
         ]
       }
     ]

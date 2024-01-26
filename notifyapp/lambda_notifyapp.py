@@ -62,7 +62,6 @@ def get_pendo_data(last_id):
     return pendo_list
 
 def build_slack_message(pendo_list):
-    licon = "information_source"
     lmessage = "Hi Team!\n\nPlease review these most recent feature request. Remember to tag any of your accounts that may share the same need/request, link SFDC opps to them where possible! If you have any questions or comments, feel free to add them directly to a feature request."
     
     if new_last_id != 0:
@@ -149,18 +148,22 @@ def lambda_handler(event, context):
     slack_webhook = os.environ["SLACK_WEBHOOK"]
     cwlog("Get data from DDB table")
     item = ddb_table.get_item(Key={'AppId': os.environ["PENDO_ID"]})
-    rec = item["Item"]
-    last_id = int(rec["NumberItem"])
-    retval = '{"last_id": ' + str(int(rec["NumberItem"])) + '}'
-    cwlog("Data retrieved: " + str(retval))
-    cwlog("Getting newest Pendo requests")
-    pendo_list = get_pendo_data(last_id)
-    cwlog(str(len(pendo_list)) + " new item(s)")
-    cwlog("Posting to Slack...")
-    post_slack(slack_webhook, pendo_list)
-    update_last_id()
-    cwlog("Last ID: " + str(new_last_id))
-    cwlog("Complete!")
+    if "Item" in item:
+        rec = item["Item"]
+        last_id = int(rec["NumberItem"])
+        retval = '{"last_id": ' + str(int(rec["NumberItem"])) + '}'
+        cwlog("Data retrieved: " + str(retval))
+        cwlog("Getting newest Pendo requests")
+        pendo_list = get_pendo_data(last_id)
+        cwlog(str(len(pendo_list)) + " new item(s)")
+        cwlog("Posting to Slack...")
+        post_slack(slack_webhook, pendo_list)
+        update_last_id()
+        cwlog("Last ID: " + str(new_last_id))
+        cwlog("Complete!")
+    else:
+        cwlog("An error occurred trying to retrieve AppId:" + os.environ["PENDO_ID"] + ". The record does not exist!")
+
 
     return {
         'isBase64Encoded': False,

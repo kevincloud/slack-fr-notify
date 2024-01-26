@@ -2,7 +2,7 @@ terraform {
   required_providers {
     launchdarkly = {
       source  = "launchdarkly/launchdarkly"
-      version = "~> 2.0"
+      version = "~> 2.15"
     }
     aws = {
       source  = "hashicorp/aws"

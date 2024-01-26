@@ -24,6 +24,10 @@ variable "timezone" {
   default     = "America/New_York"
 }
 
+variable "weekly_schedule_mins" {
+  description = "Minute of the hour to run the task"
+  default     = 0
+}
 variable "weekly_schedule_hour" {
   description = "Hour of the day to run the task"
   default     = 10
